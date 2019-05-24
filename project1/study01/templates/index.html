@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AWESOME APP</title>
+    <meta name="viewport" content="width=400px" charset="UTF-8">
+    <link rel="stylesheet" media="screen" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
+    <style>
+    div.container {
+        width:500px;
+        margin: auto;
+    }
+    div.menu {
+        margin: 20px
+    }
+    </style>
+</head>
+<body>
+    <div id="menu" style="margin: 20px">
+        <a href="/viewdata">View data</a>
+    </div>
+    <div class="container">
+        <h2 align = "center">Add Profile</h2>
+        <form style="" action="" method="post" role="form">
+            {{ form.csrf }}
+            <div class="form-group" >
+                <label for="name">Name:</label>
+                <input type="text" style="background-color: #F0E68C; font-weight: bold" class="form-control" id="name" placeholder="Enter your name" name="name">
+
+                <label for="surname">Surname:</label>
+                <input type="text" style="background-color: #F0E68C; font-weight: bold" class="form-control" id="surname" placeholder="Enter your surname" name="surname">
+
+                <label for="email">Email:</label>
+                <input type="text" style="background-color: #F0E68C; font-weight: bold" class="form-control" id="email" placeholder="Enter your e-mail adress" name="email">
+
+                <label for="password">Password:</label>
+                <input type="password" style="background-color: #F0E68C; font-weight: bold" class="form-control" id="password" placeholder="Enter a password" name="password">
+            </div>
+
+
+            <p align="center">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </p>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for message in messages %}
+                    {% if "Error" not in message[1]: %}
+                        <div align="center" class="alert alert-info">
+                            <strong>Success! </strong> {{ message[1] }}
+                        </div>
+                    {% endif %}
+                    {% if "Error" in message[1]: %}
+                        <div align="center" class="alert alert-warning">
+                            {{ message[1] }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    </div>
+</body>
+</html>
