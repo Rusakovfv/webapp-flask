@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02-1-basic-io-display</title>
+</head>
+<body>
+<form method=post action="">
+<table>
+  {% for field in form %}
+    <tr>
+        <td>{{ field.label }}</td>
+        <td>{{ field }}</td>
+    </tr>
+  {% endfor %}
+</table>
+<p><input type=submit value=calculate></form></p>
+
+    {% if result != None %}
+        {% for raw in result %}
+            <pre><kbd>{{ raw }}</kbd></pre>
+        {% endfor %}
+    {% else %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for message in messages %}
+                {% for i in message[1] %}
+                    <p>{{i}}: {{ message[1][i][0] }}</p>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% endif %}
+</body>
+</html>
